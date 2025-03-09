@@ -1,8 +1,13 @@
 * {
   box-sizing: border-box;
 }
-body {
-  font-size: 14px;
+body{
+  font-size: 100%;
+  background-size: cover;
+   margin:0;
+   padding:0;
+   width: 580px;
+   height: 435px;
 }
 span {
   display: block;
@@ -11,16 +16,10 @@ span {
   width: 580px;
   height: 435px;
   background: rgba(85,51,68,0.5);
-  padding: 24px 24px;
-  margin: 32px;
   opacity: 1;
   position: absolute;
   top: 0px;
   left: 0px;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 16px;
   overflow: hidden;
 }
 .v8_48 {
@@ -336,4 +335,9 @@ span {
 img {
   width: auto; 
   height: 50px; 
+}
+.custom-button {
+  all: unset;
+  display: block;
+  cursor: pointer;
 }
