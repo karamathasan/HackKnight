@@ -152,7 +152,7 @@ span {
   opacity: 0.20; 
 }
 .rounded-border2 {
-  width: 514px;
+  width: 250px;
   height: 36px;
   background: rgba(255,255,255,1);
   margin: 10px;
@@ -350,4 +350,10 @@ span {
   position: absolute;
   top: 0px;
   left: 80px;
+}
+.grad {
+  width: 245px;
+  height: 235px;
+  position: relative;
+  background-image: radial-gradient(circle,rgb(240, 199, 117), #eeb64200 70%);
 }
