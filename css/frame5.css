@@ -164,7 +164,6 @@ span {
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.30000001192092896);
-  overflow: hidden;
 }
 
 .v9_48 {
@@ -274,14 +273,14 @@ span {
   width: 83px;
   height: 20px;
   color: rgba(85,68,102,1);
-  position: absolute;
+  position: relative;
   top: 2px;
-  left: 200px;
+  left: 20px;
   font-family: Kumbh Sans;
   font-weight: Bold;
   font-size: 24px;
   opacity: 1;
-  text-align: center;
+  text-align: left;
 }
 .v12_76 {
   width: 267px;
@@ -360,4 +359,18 @@ span {
   all: unset;
   display: block;
   cursor: pointer;
+}
+.toggle-button {
+  position: absolute;
+  right: 0px; 
+  top: 45%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.toggle-button img {
+  width: 50px;
+  height: 50px;
 }
