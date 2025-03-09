@@ -1,3 +1,5 @@
+const fps = 15
+
 navigator.mediaDevices.getUserMedia({video: true}).then(stream => {
     const video = document.createElement("video");
     video.srcObject = stream;
@@ -12,9 +14,10 @@ navigator.mediaDevices.getUserMedia({video: true}).then(stream => {
     video.style.zIndex = "999999";
     document.body.appendChild(video);
 
+    t = parseInt(1000/fps)
     setInterval(()=>{
         getFrame(video)
-    }, 5000)
+    }, t)
 });
 
 function getFrame(videm){
@@ -44,9 +47,13 @@ async function fetchLandmarks(input){
         body: input
     }).then((data)=>{
         return data.json()
-    }).then((out)=>{
-        console.log(out)
     })
+    // .then((out)=>{
+    //     console.log(toString(out))
+    //     if (String(out).localeCompare('none')){
+    //         console.log(out)
+    //     }
+    // })
 }
 
 // (async function () {
