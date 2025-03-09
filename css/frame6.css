@@ -41,15 +41,31 @@ span {
 .name {
   color: #fff;
 }
-.v8_108 {
-  width: 514px;
-  height: 235px;
+.leftbox {
+  width: 263px;
+  height: 265px;
   background: rgba(255,255,255,1);
   margin: 10px;
   opacity: 1;
   position: absolute;
   top: 108px;
-  left: 24px;
+  left: 0px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.30000001192092896);
+  overflow: hidden;
+}
+.rightbox {
+  width: 263px;
+  height: 265px;
+  background: rgba(255,255,255,1);
+  margin: 10px;
+  opacity: 1;
+  position: absolute;
+  top: 108px;
+  left: 300px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   border-bottom-left-radius: 8px;
@@ -77,27 +93,10 @@ span {
   border-bottom-right-radius: 8px;
   overflow: hidden;
 }
-.palm {
-  width: 57px;
-  height: 57px;
-  background: url("../images/palm.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  overflow: hidden;
-}
 .v10_54 {
   width: 57px;
   height: 57px;
-  background: url("../images/rhand.png");
+  background: url("../images/v10_54.png");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -111,37 +110,16 @@ span {
 .v12_79 {
   width: 57px;
   height: 57px;
-  background: url("../images/lhand.png");
+  background: url("../images/v12_79.png");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   opacity: 1;
   position: absolute;
   top: 115px;
-  left: 20px;
+  left: 10px;
   overflow: hidden;
-  transform: rotate(-45deg);
-}
-.horizontal-line1 {
-  width: 434px;
-  height: 1px; 
-  background-color: black; 
-  opacity: 0.2;
-  margin: 10px 0; 
-  position: absolute;
-  top: 105px;
-  left: 15px;
-;
-}
-.horizontal-line2 {
-  width: 434px;
-  height: 1px; 
-  background-color: black; 
-  opacity: 0.2;
-  margin: 10px 0; 
-  position: absolute;
-  top: 48px;
-  left: 15px;
+  transform: rotate(45deg);
 }
 .rounded-border {
   width: 475px;
@@ -168,7 +146,7 @@ span {
   overflow: hidden;
 }
 
-.v9_48 {
+.ctrlkey {
   width: 76px;
   height: 46px;
   background: url("../images/Ctrl.png");
@@ -178,10 +156,10 @@ span {
   opacity: 1;
   position: absolute;
   top: 62px;
-  left: 382px;
+  left: 0px;
   overflow: hidden;
 }
-.v9_37 {
+.fkey {
   width: 39px;
   height: 37px;
   background: url("../images/F.png");
@@ -191,10 +169,10 @@ span {
   opacity: 0.5;
   position: absolute;
   top: 14px;
-  left: 406px;
+  left: 0px;
   overflow: hidden;
 }
-.v10_51 {
+.ekey {
   width: 43px;
   height: 43px;
   background: url("../images/E.png");
@@ -204,7 +182,7 @@ span {
   opacity: 0.6000000238418579;
   position: absolute;
   top: 121px;
-  left: 406px;
+  left: 0px;
   overflow: hidden;
 }
 .name {
@@ -224,11 +202,11 @@ span {
   overflow: hidden;
 }
 .v11_71 {
-  width: 144px;
+  width: 200px;
   color: rgba(84,54,102,1);
   position: absolute;
-  top: 18px;
-  left: 160px;
+  top: 100px;
+  left: 25px;
   font-family: Kumbh Sans;
   font-weight: Bold;
   font-size: 20px;
@@ -260,11 +238,10 @@ span {
   text-align: center;
 }
 .v10_70 {
-  width: 326px;
+  width: 265px;
   color: rgba(85,68,102,1);
   position: absolute;
-  top: 129px;
-  left: 124px;
+  top: 10px;
   font-family: Kumbh Sans;
   font-weight: Bold;
   font-size: 20px;
@@ -350,4 +327,13 @@ span {
   position: absolute;
   top: 0px;
   left: 80px;
+}
+.image-container {
+  display: flex; 
+  justify-content: center; 
+  gap: 20px; 
+}
+img {
+  width: auto; 
+  height: 50px; 
 }
