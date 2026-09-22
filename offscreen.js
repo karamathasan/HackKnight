@@ -30,7 +30,8 @@ async function tick(video){
     let wait = IDLE_MS
     try {
         if (video.videoWidth) {
-            const out = await sendFrame(await captureFrame(video))
+            const frame = await captureFrame(video)
+            const out = await sendFrame(frame)
             wait = out.hand ? ACTIVE_MS : IDLE_MS
         }
     } catch (err) {
@@ -41,17 +42,20 @@ async function tick(video){
 }
 
 function captureFrame(video){
+    // capturedAt lets the server report how long a gesture took to act on
+    const capturedAt = Date.now()
     canvas.width = WIDTH
     canvas.height = Math.round(WIDTH * video.videoHeight / video.videoWidth)
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
-    return new Promise(resolve => canvas.toBlob(resolve, "image/jpeg", QUALITY))
+    return new Promise(resolve => canvas.toBlob(blob => resolve({ blob, capturedAt }), "image/jpeg", QUALITY))
 }
 
-async function sendFrame(blob){
+async function sendFrame({ blob, capturedAt }){
     const res = await fetch('http://127.0.0.1:5000/hands', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/octet-stream'
+            'Content-Type': 'application/octet-stream',
+            'X-Captured-At': String(capturedAt)
         },
         body: blob
     })

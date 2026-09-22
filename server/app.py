@@ -24,6 +24,7 @@ PAUSE_HOLD_FRAMES = 2    # consecutive open-palm frames needed before pausing
 PAUSE_COOLDOWN = 1.5     # seconds before pause can fire again
 open_frames = 0
 last_pause = 0.0
+first_open_ms = None     # capture time (epoch ms) of the first frame in the current open-palm run
 
 def lmsLen(i,j,lms):
     len = np.linalg.norm(np.array([lms[i].x-lms[j].x,lms[i].y-lms[j].y]))
@@ -41,8 +42,16 @@ def open_palm(lms,w,h):
         print("finger ratios", [round(r,2) for r in ratios])
     return all(r > EXTENDED_RATIO for r in ratios)
 
-def check_gesture(lms,w,h):
-    global current_gesture, open_frames, last_pause
+def latency_note(now, captured_ms):
+    # Both clocks are epoch time on this machine, so the extension's capture time is comparable.
+    # "total" is palm first captured -> key sent; "frame" is just the last frame's trip through the pipeline.
+    if first_open_ms is None or captured_ms is None:
+        return ""
+    return " | latency: total %.0f ms (first open-palm frame captured -> key sent), last frame %.0f ms" % (
+        now*1000 - first_open_ms, now*1000 - captured_ms)
+
+def check_gesture(lms,w,h,captured_ms=None):
+    global current_gesture, open_frames, last_pause, first_open_ms
     pointer = lmsLen(8,5,lms)
     middle = lmsLen(12,9,lms)
     ring = lmsLen(16,13,lms)
@@ -50,13 +59,15 @@ def check_gesture(lms,w,h):
 
     if open_palm(lms,w,h):
         open_frames += 1
+        if open_frames == 1:
+            first_open_ms = captured_ms
         now = time.time()
         # fire once when the palm has been held up, not on every frame while it stays up
         if open_frames == PAUSE_HOLD_FRAMES and now - last_pause > PAUSE_COOLDOWN:
             keyboard.press('space')
             keyboard.release('space')
             last_pause = now
-            print("pause gesture -> space")
+            print("pause gesture -> space" + latency_note(now, captured_ms))
         current_gesture = "pause"
         return "pause"
     open_frames = 0
@@ -84,7 +95,8 @@ def returnHands():
 
     res = "none"
     if result.multi_hand_landmarks:
-        res = check_gesture(result.multi_hand_landmarks[0].landmark, w, h)
+        res = check_gesture(result.multi_hand_landmarks[0].landmark, w, h,
+                            request.headers.get("X-Captured-At", type=float))
         #     landmarks = [{"x": lm.x, "y": lm.y, "z": lm.z} for lm in hand_landmarks.landmark]
         #     hands_data.append(landmarks)
         # overlay
